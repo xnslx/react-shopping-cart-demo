@@ -1,6 +1,7 @@
 import React, {useReducer, useState} from 'react';
 import './App.css';
 import Items from '../src/Component/Items/Items';
+import Sumup from './Component/Sumup/Sumup';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 library.add(faShoppingCart);
@@ -40,11 +41,11 @@ function App() {
   const [setItems] = useState(initialState)
 
   const changeHandler = e => {
-    setItems({items: e.target.value})
+    setItems({value: e.target.value})
   }
   return (
     <div className="App">
-      <h1>The total items: </h1>
+      <Sumup />
       <div>
         {state.map(item => (
           <Items
