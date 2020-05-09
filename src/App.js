@@ -43,9 +43,20 @@ function App() {
   const changeHandler = e => {
     setItems({value: e.target.value})
   }
+
+  // let itemsArray = [];
+  // const itemsNumHandler = () => {
+  //   for(let item of state) {
+  //     if(item.value > 0) {
+  //       itemsArray.push(item.id)
+  //     }
+  //   }
+  //   return itemsArray;
+  // }
+  // console.log(itemsArray)
   return (
     <div className="App">
-      <Sumup />
+      <Sumup totalItems={state.filter(item => item.value > 0).length}/>
       <div>
         {state.map(item => (
           <Items
