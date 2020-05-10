@@ -21,7 +21,7 @@
         "deploy": "gh-pages -d build",
         "eject": "react-scripts eject"
     },
-    "homepage": "http://xianliuidesigner.com/react-shopping-cart-demo/",
+    "homepage": "http://xianliuidesigner.com",
     "eslintConfig": {
         "extends": "react-app"
     },
