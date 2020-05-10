@@ -24,13 +24,15 @@ const reducer = (state, action) => {
       })
     case "DECREMENT":
         return state.map(item => {
-          if (item.id === action.id) {
+          if (item.id === action.id && item.value > 0) {
             return {...item, value: item.value - 1}
           }
           return item;
         })
     case "DELATE":
-      return state.filter(item => item.id !== action.id)
+      return state.filter(item => item.id !== action.id);
+    case "RESET" :
+      return initialState;
     default:
       return state;
   }
@@ -44,19 +46,23 @@ function App() {
     setItems({value: e.target.value})
   }
 
-  // let itemsArray = [];
-  // const itemsNumHandler = () => {
-  //   for(let item of state) {
-  //     if(item.value > 0) {
-  //       itemsArray.push(item.id)
-  //     }
-  //   }
-  //   return itemsArray;
-  // }
-  // console.log(itemsArray)
+  let itemsArray = [];
+  const itemsNumHandler = arr => {
+    for (let item of arr) {
+      if (item.value > 0) {
+        itemsArray.push(item);
+      }
+      if (item.value < 0) {
+        itemsArray.pop(item);
+      }
+    }
+    return itemsArray;
+  };
+  itemsNumHandler(state);
+
   return (
     <div className="App">
-      <Sumup totalItems={state.filter(item => item.value > 0).length}/>
+      <Sumup changed={itemsNumHandler} value={itemsArray.length}/>
       <div>
         {state.map(item => (
           <Items
@@ -69,6 +75,7 @@ function App() {
           />
         ))}
       </div>
+      <button onClick={() => dispatch({type: "RESET"})} style={{marginTop: '40px'}}>Reset</button>
     </div>
   );
 }
